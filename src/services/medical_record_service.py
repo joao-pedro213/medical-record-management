@@ -1,3 +1,5 @@
+import sys
+sys.path.append('./medical-record-management/src')
 from flask import Flask, request, jsonify
 from datetime import datetime
 from src.medical_record.medical_record import MedicalRecord
