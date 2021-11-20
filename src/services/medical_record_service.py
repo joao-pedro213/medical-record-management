@@ -23,10 +23,15 @@ def save_medical_record():
         )
         medical_record.save(medical_record_local_path=medical_record_local_path)
         message = 'medical record inserted with success.'
-
     else:
         message = 'all fields are required.'
     return jsonify({'message': message})
+
+
+@app.route('/', methods=['GET'])
+def debug_route():
+    MedicalRecord.remove_expired_medical_records_data()
+    return jsonify({'message': 'dubug mode :)'})
 
 
 if __name__ == '__main__':
