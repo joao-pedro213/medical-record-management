@@ -49,6 +49,7 @@ class RDSService:
         try:
             print(f'Executing delete command in {table_name} table.')
             sql_query = f"delete from stage.{table_name} where {where_condition};"
+            print(sql_query)
             with self.mysql_connection.cursor() as cursor:
                 cursor.execute(query=sql_query)
             self.mysql_connection.commit()

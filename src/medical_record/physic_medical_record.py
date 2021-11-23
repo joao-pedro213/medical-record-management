@@ -51,7 +51,10 @@ class PhysicMedicalRecord(MedicalRecord):
             print('Getting expired dates from stage table.')
             mysql_connection = RDSService().mysql_connection
             cutoff_date = (datetime.utcnow() - timedelta(days=7300)).strftime('%Y-%m-%d')
-            sql_query = f"select s3_file_name from stage.medical_record where created_at < '{cutoff_date}';"
+            sql_query = (
+                f"select s3_file_name from stage.medical_record " +
+                f"where created_at < '{cutoff_date}' and is_electronic = false;"
+            )
             with mysql_connection.cursor() as cursor:
                 cursor.execute(query=sql_query)
                 expired_file_names = cursor.fetchall()
